@@ -7,6 +7,7 @@
  */
 namespace DigitalVirgo\MTSubscriptions\Service;
 
+use DigitalVirgo\MTSubscriptions\Model\GetOrderStatusResponse;
 use DigitalVirgo\MTSubscriptions\Model\MtResponse;
 use DigitalVirgo\MTSubscriptions\Model\DeactivationForm;
 use DigitalVirgo\MTSubscriptions\Model\InitSubscriptionRequest;
@@ -19,6 +20,7 @@ use DigitalVirgo\MTSubscriptions\Service\Client\Exception\NotFoundException;
 use DigitalVirgo\MTSubscriptions\Service\Client\Exception\UnauthorizedException;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Stream\Stream;
 
 /**
@@ -58,16 +60,16 @@ class Client extends GuzzleClient
      * @param string $url Request path
      * @param string $method Http method
      * @param mixed $payload Data to send with request
-     * @return string Body string response
+     * @param array $options Request addtional options
+     * @return ResponseInterface Body string response
      * @throws BadRequestException
      * @throws MethodNotAllowedException
      * @throws NotFoundException
      * @throws UnauthorizedException
      * @throws \Exception
      */
-    protected function _request($url, $method = 'GET', $payload = null)
+    protected function _request($url, $method = 'GET', $payload = null, $options = [])
     {
-        $options = [];
         switch ($method) {
             case 'GET':
                 if (is_array($payload)) {
@@ -112,9 +114,8 @@ class Client extends GuzzleClient
                     break;
             }
         }
-        /** @var \GuzzleHttp\Stream\Stream $body */
-        $body = $response->getBody();
-        return (string)$body;
+
+        return $response;
     }
 
     /**
@@ -122,6 +123,7 @@ class Client extends GuzzleClient
      *
      * @param InitSubscriptionRequest|array $request Order data
      * @param bool $raw return raw xml output
+     * @return InitSubscriptionResponse|string
      */
     public function initSubscription($request, $raw = false)
     {
@@ -129,7 +131,7 @@ class Client extends GuzzleClient
             $request = new InitSubscriptionRequest($request);
         }
 
-        $response = $this->_request("rwdsubscriptions/initSubscription", "POST", $request);
+        $response = (string) $this->_request("rwdsubscriptions/initSubscription", "POST", $request)->getBody();
 
         if ($raw) {
             return $response;
@@ -145,6 +147,7 @@ class Client extends GuzzleClient
      *
      * @param string $transactionIdOrDeactivationForm Transaction UID of subscription order
      * @param bool $raw return raw xml output
+     * @return MtResponse|string
      */
     public function deactivate($transactionIdOrDeactivationForm, $raw = false)
     {
@@ -158,7 +161,7 @@ class Client extends GuzzleClient
             ]);
         }
 
-        $response = $this->_request("client2/deactivation/xml", "POST", $request);
+        $response = (string) $this->_request("client2/deactivation/xml", "POST", $request)->getBody();
 
         if ($raw) {
             return $response;
@@ -176,7 +179,21 @@ class Client extends GuzzleClient
      */
     public function getStatus($transactionId, $raw = false)
     {
-        //@todo
+        $request = [
+            'transactionId' => $transactionId
+        ];
+
+        $response = $this->_request("rwdsubscriptions/getOrderStatus", "POST", json_encode($request), [
+            'headers' => [
+                'Content-type' => 'application/json'
+            ]
+        ]);
+
+        if ($raw) {
+            return (string) $response->getBody();
+        }
+
+        return new GetOrderStatusResponse($response->json()['data']);
     }
 
 }
