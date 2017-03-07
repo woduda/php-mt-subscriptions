@@ -1,5 +1,6 @@
 {
     "name": "digitalvirgo/mt-subscriptions",
+    "version": "0.1.0",
     "description": "Official MT Subscriptions PHP Library provided by DigitalVirgo",
     "type": "library",
     "authors": [
