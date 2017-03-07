@@ -7,11 +7,6 @@
  */
 namespace DigitalVirgo\MTSubscriptions\Model;
 
-use DigitalVirgo\MTSP\Model\Enum\ServiceStatus;
-use DigitalVirgo\MTSP\Model\Enum\ServiceType;
-use DigitalVirgo\MTSP\Service\Client;
-use DigitalVirgo\MTSP\Util\Helper;
-
 /**
  * Class InitSubscriptionRequest
  */

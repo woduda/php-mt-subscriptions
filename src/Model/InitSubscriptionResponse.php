@@ -14,7 +14,6 @@ use DigitalVirgo\MTSubscriptions\Model\Enum\WebResponseStatus;
 class InitSubscriptionResponse extends RwdResponse
 {
 
-
     /**
      * @var string
      */

@@ -7,6 +7,8 @@
  */
 namespace DigitalVirgo\MTSubscriptions\Service;
 
+use DigitalVirgo\MTSubscriptions\Model\MtResponse;
+use DigitalVirgo\MTSubscriptions\Model\DeactivationForm;
 use DigitalVirgo\MTSubscriptions\Model\InitSubscriptionRequest;
 use DigitalVirgo\MTSubscriptions\Model\InitSubscriptionResponse;
 use DigitalVirgo\MTSubscriptions\Model\ModelAbstractTraitInterface;
@@ -141,12 +143,29 @@ class Client extends GuzzleClient
     /**
      * Deactivate subscriptions order
      *
-     * @param string $transactionId Transaction UID of subscription order
+     * @param string $transactionIdOrDeactivationForm Transaction UID of subscription order
      * @param bool $raw return raw xml output
      */
-    public function deactivate($transactionId, $raw = false)
+    public function deactivate($transactionIdOrDeactivationForm, $raw = false)
     {
-        //@todo
+        $request = $transactionIdOrDeactivationForm;
+
+        if (is_array($transactionIdOrDeactivationForm)) {
+            $request = new DeactivationForm($transactionIdOrDeactivationForm);
+        } else if (is_string($transactionIdOrDeactivationForm)) {
+            $request = new DeactivationForm([
+                'transactionId' => $transactionIdOrDeactivationForm
+            ]);
+        }
+
+        $response = $this->_request("client2/deactivation/xml", "POST", $request);
+
+        if ($raw) {
+            return $response;
+        }
+
+        return (new MtResponse())->fromXml($response);
+
     }
 
     /**
