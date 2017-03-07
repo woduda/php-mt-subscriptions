@@ -7,6 +7,8 @@
  */
 namespace DigitalVirgo\MTSubscriptions\Service;
 
+use DigitalVirgo\MTSubscriptions\Model\InitSubscriptionRequest;
+use DigitalVirgo\MTSubscriptions\Model\InitSubscriptionResponse;
 use DigitalVirgo\MTSubscriptions\Model\ModelAbstractTraitInterface;
 use DigitalVirgo\MTSubscriptions\Service\Client\Exception\BadRequestException;
 use DigitalVirgo\MTSubscriptions\Service\Client\Exception\ForbiddenException;
@@ -22,7 +24,8 @@ use GuzzleHttp\Stream\Stream;
  */
 class Client extends GuzzleClient
 {
-    const API_URL = 'http://mtservice.services.avantis.pl/';
+//    const API_URL = 'http://mtservice.services.avantis.pl/mtsubscriber/'';
+    const API_URL = 'http://testsrv.avantis.pl/mtsubscriber/';
 
     /**
      * Instance for singleton
@@ -74,7 +77,6 @@ class Client extends GuzzleClient
             case 'POST':
             case 'PUT':
                 if ($payload instanceof ModelAbstractTraitInterface) {
-//                    var_dump($payload->toXml(true));
                     $options['body'] = Stream::factory($payload->toXml());
                     $options['headers']['Content-type'] = 'application/xml';
                 } else {
@@ -116,12 +118,24 @@ class Client extends GuzzleClient
     /**
      * Create new subscription order
      *
-     * @param $subscription
+     * @param InitSubscriptionRequest|array $request Order data
      * @param bool $raw return raw xml output
      */
-    public function initSubscription($subscription, $raw = false)
+    public function initSubscription($request, $raw = false)
     {
-        //@todo
+        if (is_array($request)) {
+            $request = new InitSubscriptionRequest($request);
+        }
+
+        $response = $this->_request("rwdsubscriptions/initSubscription", "POST", $request);
+
+        if ($raw) {
+            return $response;
+        }
+
+
+        return (new InitSubscriptionResponse())->fromXml($response);
+
     }
 
     /**
