@@ -1,0 +1,24 @@
+{
+    "name": "digitalvirgo/mt-subscriptions",
+    "description": "Official MT Subscriptions PHP Library provided by DigitalVirgo",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Adam Jurek",
+            "email": "adam.jurek@digitalvirgo.pl"
+        }
+    ],
+    "require-dev": {
+        "evert/phpdoc-md": "^0.2.0",
+        "phpdocumentor/phpdocumentor": "^2.9"
+    },
+    "require": {
+        "php": ">=5.5",
+        "guzzlehttp/guzzle": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "DigitalVirgo\\MTSusbsciptions\\": "src/"
+        }
+    }
+}
