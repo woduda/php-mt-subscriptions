@@ -123,13 +123,15 @@ class GetOrderStatusResponse extends RwdResponse
      */
     protected function _getDomMap()
     {
+        $domMap = parent::_getDomMap();
+        $domMap = reset($domMap);
 
         return [
             'initSubscriptionResponse' => array_merge([
                 'transactionId' => 'transactionId',
                 'subscriptionPageUrl' => 'subscriptionPageUrl',
                 'status' => 'status',
-            ], reset(parent::_getDomMap()))
+            ], reset($domMap))
         ];
     }
 
