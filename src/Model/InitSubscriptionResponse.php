@@ -104,7 +104,7 @@ class InitSubscriptionResponse extends RwdResponse
                 'transactionId' => 'transactionId',
                 'subscriptionPageUrl' => 'subscriptionPageUrl',
                 'status' => 'status',
-            ], reset($domMap))
+            ], $domMap)
         ];
     }
 

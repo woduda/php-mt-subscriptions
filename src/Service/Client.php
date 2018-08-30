@@ -28,8 +28,8 @@ use GuzzleHttp\Stream\Stream;
  */
 class Client extends GuzzleClient
 {
-//    const API_URL = 'http://mtservice.services.avantis.pl/mtsubscriber/'';
-    const API_URL = 'http://testsrv.avantis.pl/mtsubscriber/';
+    const API_URL = 'https://subscription-justpay.digitalvirgo.pl/mtsubscriber/';
+
 
     /**
      * Instance for singleton
@@ -43,16 +43,15 @@ class Client extends GuzzleClient
      *
      * @return Client
      */
-    public static function getInstance()
+    public static function getInstance($apiUrl = null)
     {
         if (null === static::$_instance) {
             static::$_instance = new static(array(
-                'base_url' => self::API_URL,
+                'base_url' => $apiUrl ?: self::API_URL,
             ));
         }
         return static::$_instance;
     }
-
 
     /**
      * Send http request

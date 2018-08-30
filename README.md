@@ -16,7 +16,7 @@ or manualy update composer.json
 ...
     "require": {
         ...
-        "digitalvirgo/mt-subscriptions":"0.2.2"
+        "digitalvirgo/mt-subscriptions":"0.2.3"
     }
 }
 ```
