@@ -119,7 +119,8 @@ trait ModelAbstractTrait
                     break;
             }
 
-            $field = $dom->createElement($name, $element);
+            $field = $dom->createElement($name);
+            $field->appendChild($dom->createTextNode($element));
             $root->appendChild($field);
         }
     }
