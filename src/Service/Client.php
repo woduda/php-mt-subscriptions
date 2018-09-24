@@ -54,6 +54,19 @@ class Client extends GuzzleClient
     }
 
     /**
+     * Set authorization data
+     *
+     * @param string $login login
+     * @param string $password password
+     */
+    public function setAuth($login, $password)
+    {
+        $this
+            ->setLogin($login)
+            ->setPassword($password);
+    }
+
+    /**
      * Send http request
      *
      * @param string $url Request path

@@ -25,6 +25,9 @@
 ```php
 $client = Client::getInstance();
 
+// Set authorization if required
+$client->setAuth('YOUR LOGIN', 'YOUR PASSWORD');
+
 /** @var DigitalVirgo\MTSubscriptions\Model\MtResponse $respose */
 $respose = $client->deactivate('1234567890qwertyuiopasdfghjklzxc');
 

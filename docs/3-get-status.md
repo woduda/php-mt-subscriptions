@@ -13,6 +13,9 @@
 ```php
 $client = Client::getInstance();
 
+// Set authorization if required
+$client->setAuth('YOUR LOGIN', 'YOUR PASSWORD');
+
 /** @var DigitalVirgo\MTSubscriptions\Model\GetOrderStatusResponse $respose */
 $respose = $client->getStatus('1234567890qwertyuiopasdfghjklzxc');
 ```

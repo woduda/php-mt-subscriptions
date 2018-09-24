@@ -13,6 +13,9 @@
 ```php
 $client = Client::getInstance();
 
+// Set authorization if required
+$client->setAuth('YOUR LOGIN', 'YOUR PASSWORD');
+
 /** @var DigitalVirgo\MTSubscriptions\Model\InitSubscriptionResponse $respose */
 $respose = $client->initSubscription([
     'partnerName' => 'YOUR_PARTNER_NAME',
