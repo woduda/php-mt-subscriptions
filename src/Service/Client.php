@@ -61,9 +61,9 @@ class Client extends GuzzleClient
      */
     public function setAuth($login, $password)
     {
-        $this
-            ->setLogin($login)
-            ->setPassword($password);
+        $this->setDefaultOption('auth', [
+            $login, $password
+        ]);
     }
 
     /**
@@ -102,7 +102,8 @@ class Client extends GuzzleClient
         }
         try {
             $response = $this->send(
-                $this->createRequest($method, $url, $options)
+                $this
+                    ->createRequest($method, $url, $options)
             );
         } catch (ClientException $e) {
             switch ($e->getResponse()->getStatusCode()) {
