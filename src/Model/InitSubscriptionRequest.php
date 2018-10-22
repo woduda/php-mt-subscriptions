@@ -39,6 +39,26 @@ class InitSubscriptionRequest extends ModelAbstract
     protected $_clientIp;
 
     /**
+     * @var boolean
+     */
+    protected $_tryAvailable;
+
+    /**
+     * @var string
+     */
+    protected $_msisdn;
+
+    /**
+     * @var string
+     */
+    protected $_extClientId;
+
+    /**
+     * @var string
+     */
+    protected $_layoutId;
+
+    /**
      * @return string
      */
     public function getPartnerName()
@@ -129,6 +149,70 @@ class InitSubscriptionRequest extends ModelAbstract
     }
 
     /**
+     * @return bool
+     */
+    public function isTryAvailable()
+    {
+        return $this->_tryAvailable;
+    }
+
+    /**
+     * @param bool $tryAvailable
+     */
+    public function setTryAvailable($tryAvailable)
+    {
+        $this->_tryAvailable = $tryAvailable;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMsisdn()
+    {
+        return $this->_msisdn;
+    }
+
+    /**
+     * @param string $msisdn
+     */
+    public function setMsisdn($msisdn)
+    {
+        $this->_msisdn = $msisdn;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtClientId()
+    {
+        return $this->_extClientId;
+    }
+
+    /**
+     * @param string $extClientId
+     */
+    public function setExtClientId($extClientId)
+    {
+        $this->_extClientId = $extClientId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLayoutId()
+    {
+        return $this->_layoutId;
+    }
+
+    /**
+     * @param string $layoutId
+     */
+    public function setLayoutId($layoutId)
+    {
+        $this->_layoutId = $layoutId;
+    }
+
+    /**
      * Return Dom Map for parser
      *
      * @return array
@@ -137,11 +221,15 @@ class InitSubscriptionRequest extends ModelAbstract
     {
         return [
             'initSubscriptionRequest' => [
-                'partnerName' => 'partnerName',
-                'serviceName' => 'serviceName',
-                'successUrl' => 'successUrl',
-                'failureUrl' => 'failureUrl',
-                'clientIp' => 'clientIp'
+                'partnerName'  => 'partnerName',
+                'serviceName'  => 'serviceName',
+                'successUrl'   => 'successUrl',
+                'failureUrl'   => 'failureUrl',
+                'clientIp'     => 'clientIp',
+                'tryAvailable' => 'tryAvailable',
+                'msisdn'       => 'msisdn',
+                'extClientId'  => 'extClientId',
+                'layoutId'     => 'layoutId'
             ]
         ];
 
