@@ -150,9 +150,9 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  string
      */
-    public function getServiceName​()
+    public function getServiceName()
     {
-        return $this->_serviceName​;
+        return $this->_serviceName;
     }
 
     /**
@@ -250,9 +250,9 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  string
      */
-    public function getLastTransactionId​()
+    public function getLastTransactionId()
     {
-        return $this->_lastTransactionId​;
+        return $this->_lastTransactionId;
     }
 
     /**
