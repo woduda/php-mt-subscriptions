@@ -30,7 +30,7 @@ class NotifySubscriptionRequest extends ModelAbstract
     /**
      * @var string
      */
-    protected $_serviceName​;
+    protected $_serviceName;
 
     /**
      * @var int
@@ -50,7 +50,7 @@ class NotifySubscriptionRequest extends ModelAbstract
     /**
      * @var string
      */
-    protected $_lastTransactionId​;
+    protected $_lastTransactionId;
 
     /**
      * Return Dom Map for parser
@@ -92,7 +92,7 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  self
      */
-    public function setMsisdn(string $msisdn)
+    public function setMsisdn($msisdn)
     {
         $this->_msisdn = $msisdn;
 
@@ -116,7 +116,7 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  self
      */
-    public function setOldMsisdn(string $oldMsisdn)
+    public function setOldMsisdn($oldMsisdn)
     {
         $this->_oldMsisdn = $oldMsisdn;
 
@@ -140,7 +140,7 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  self
      */
-    public function setOperator(string $operator)
+    public function setOperator($operator)
     {
         $this->_operator = $operator;
 
@@ -164,9 +164,9 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  self
      */
-    public function setServiceName​(string $serviceName​)
+    public function setServiceName($serviceName)
     {
-        $this->_serviceName​ = $serviceName​;
+        $this->_serviceName = $serviceName;
 
         return $this;
     }
@@ -188,7 +188,7 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  self
      */
-    public function setStatus(int $status)
+    public function setStatus($status)
     {
         $this->_status = $status;
 
@@ -240,7 +240,7 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  self
      */
-    public function setSource(string $source)
+    public function setSource($source)
     {
         $this->_source = $source;
 
@@ -264,9 +264,9 @@ class NotifySubscriptionRequest extends ModelAbstract
      *
      * @return  self
      */
-    public function setLastTransactionId​(string $lastTransactionId​)
+    public function setLastTransactionId($lastTransactionId)
     {
-        $this->_lastTransactionId​ = $lastTransactionId​;
+        $this->_lastTransactionId = $lastTransactionId;
 
         return $this;
     }
