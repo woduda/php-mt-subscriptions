@@ -61,16 +61,14 @@ class NotifySubscriptionRequest extends ModelAbstract
     {
         return [
             'subscriber' => [
-                'msisdn'     => 'msisdn',
-                'oldMsisdn'  => 'oldMsisdn',
-                'serviceName'  => 'serviceName',
-                ''   => 'successUrl',
-                'failureUrl'   => 'failureUrl',
-                'clientIp'     => 'clientIp',
-                'tryAvailable' => 'tryAvailable',
-                'msisdn'       => 'msisdn',
-                'extClientId'  => 'extClientId',
-                'layoutId'     => 'layoutId'
+                'msisdn'            => 'msisdn',
+                'oldMsisdn'         => 'oldMsisdn',
+                'operator'          => 'operator',
+                'serviceName'       => 'serviceName',
+                'status'            => 'status',
+                'updateDate'        => 'updateDate',
+                'source'            => 'source',
+                'lastTransactionId' => 'lastTransactionId',
             ]
         ];
     }
