@@ -13,6 +13,7 @@ use DigitalVirgo\MTSubscriptions\Model\DeactivationForm;
 use DigitalVirgo\MTSubscriptions\Model\InitSubscriptionRequest;
 use DigitalVirgo\MTSubscriptions\Model\InitSubscriptionResponse;
 use DigitalVirgo\MTSubscriptions\Model\ModelAbstractTraitInterface;
+use DigitalVirgo\MTSubscriptions\Model\NotifySubscriptionRequest;
 use DigitalVirgo\MTSubscriptions\Service\Client\Exception\BadRequestException;
 use DigitalVirgo\MTSubscriptions\Service\Client\Exception\ForbiddenException;
 use DigitalVirgo\MTSubscriptions\Service\Client\Exception\MethodNotAllowedException;
@@ -152,7 +153,6 @@ class Client extends GuzzleClient
 
 
         return (new InitSubscriptionResponse())->fromXml($response);
-
     }
 
     /**
@@ -168,7 +168,7 @@ class Client extends GuzzleClient
 
         if (is_array($transactionIdOrDeactivationForm)) {
             $request = new DeactivationForm($transactionIdOrDeactivationForm);
-        } else if (is_string($transactionIdOrDeactivationForm)) {
+        } elseif (is_string($transactionIdOrDeactivationForm)) {
             $request = new DeactivationForm([
                 'transactionId' => $transactionIdOrDeactivationForm
             ]);
@@ -181,7 +181,6 @@ class Client extends GuzzleClient
         }
 
         return (new MtResponse())->fromXml($response);
-
     }
 
     /**
@@ -209,4 +208,15 @@ class Client extends GuzzleClient
         return new GetOrderStatusResponse($response->json()['data']);
     }
 
+    /**
+     * Parse notification about subscriber registration in service
+     * @return  NotifySubscriptionRequest
+     * @throws \Exception
+     */
+    public function getNotifySubscriptionRequest()
+    {
+        $postData = file_get_contents("php://input");
+        $requestObj = new NotifySubscriptionRequest();
+        return $requestObj->fromXml($postData);
+    }
 }
